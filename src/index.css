@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Inter:wght@300;400;500;600;700&family=Noto+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Manrope:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* DEFAULT = STREETWEAR */
+:root, [data-theme="streetwear"] {
+  --color-bg: #0e0e0e;
+  --color-surface: #0e0e0e;
+  --color-surface-low: #131313;
+  --color-surface-mid: #1a1a1a;
+  --color-surface-high: #20201f;
+  --color-surface-highest: #262626;
+  --color-on-surface: #ffffff;
+  --color-on-surface-var: #adaaaa;
+  --color-primary: #f3ffca;
+  --color-primary-dim: #beee00;
+  --color-primary-container: #cafd00;
+  --color-on-primary: #516700;
+  --color-outline-var: #484847;
+  --color-error: #ff7351;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --radius-btn: 0px;
+  --radius-card: 0px;
+  --nav-bg: rgba(14,14,14,0.80);
+  --transition-speed: 200ms;
+}
+
+[data-theme="luxury"] {
+  --color-bg: #fbf9f4;
+  --color-surface: #fbf9f4;
+  --color-surface-low: #f5f4ed;
+  --color-surface-mid: #efeee6;
+  --color-surface-high: #e8e7de;
+  --color-surface-highest: #e2e3d9;
+  --color-on-surface: #31332c;
+  --color-on-surface-var: #636560;
+  --color-primary: #5f5e5e;
+  --color-primary-dim: #535252;
+  --color-primary-container: #e2e3d9;
+  --color-on-primary: #faf7f6;
+  --color-outline-var: #b1b3a9;
+  --color-error: #9e422c;
+  --font-display: 'Noto Serif', serif;
+  --font-body: 'Manrope', sans-serif;
+  --radius-btn: 0px;
+  --radius-card: 0px;
+  --nav-bg: rgba(251,249,244,0.70);
+  --transition-speed: 400ms;
+}
+
+[data-theme="casual"] {
+  --color-bg: #f5f6f7;
+  --color-surface: #f5f6f7;
+  --color-surface-low: #eff1f2;
+  --color-surface-mid: #e6e8ea;
+  --color-surface-high: #dde0e2;
+  --color-surface-highest: #d4d8da;
+  --color-on-surface: #2c2f30;
+  --color-on-surface-var: #43474a;
+  --color-primary: #006479;
+  --color-primary-dim: #004d5e;
+  --color-primary-container: #40cef3;
+  --color-on-primary: #ffffff;
+  --color-outline-var: rgba(67,71,74,0.15);
+  --color-error: #B91C1C;
+  --font-display: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Be Vietnam Pro', sans-serif;
+  --radius-btn: 9999px;
+  --radius-card: 2rem;
+  --nav-bg: rgba(245,246,247,0.70);
+  --transition-speed: 200ms;
+}
+
+* { transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease; }
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-on-surface);
+  font-family: var(--font-body);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-highest);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+.font-headline { font-family: var(--font-display); }
+.font-label { font-family: var(--font-body); text-transform: uppercase; letter-spacing: 0.1em; }
