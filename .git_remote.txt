@@ -1,0 +1,2 @@
+﻿origin	https://github.com/priyanshuanand1635/Outfit-Store.git (fetch)
+origin	https://github.com/priyanshuanand1635/Outfit-Store.git (push)
