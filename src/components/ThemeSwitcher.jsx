@@ -1,10 +1,16 @@
 import { useTheme } from '../context/ThemeContext'
 import { Zap, Gem, Shirt, ShoppingBag } from 'lucide-react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 export default function ThemeSwitcher() {
   const { theme, setTheme } = useTheme()
   const location = useLocation()
+  const navigate = useNavigate()
+
+  const handleThemeChange = (newTheme) => {
+    setTheme(newTheme)
+    navigate('/')
+  }
 
   return (
     <>
@@ -14,7 +20,7 @@ export default function ThemeSwitcher() {
           {['streetwear', 'luxury', 'casual'].map((t) => (
             <button
               key={t}
-              onClick={() => setTheme(t)}
+              onClick={() => handleThemeChange(t)}
               className={`
                 px-6 py-2 rounded-full text-[10px] font-black tracking-widest uppercase transition-all duration-300
                 ${theme === t 
@@ -33,7 +39,7 @@ export default function ThemeSwitcher() {
       <div className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-md">
         <div className="bg-zinc-900/90 backdrop-blur-2xl rounded-full px-2 py-2 shadow-2xl flex justify-between items-center border border-white/5 overflow-hidden">
           <button
-            onClick={() => setTheme('streetwear')}
+            onClick={() => handleThemeChange('streetwear')}
             className={`flex flex-col items-center flex-1 py-1.5 transition-all
               ${theme === 'streetwear' ? 'bg-theme-primary text-black rounded-full' : 'text-zinc-500'}
             `}
@@ -43,7 +49,7 @@ export default function ThemeSwitcher() {
           </button>
           
           <button
-            onClick={() => setTheme('luxury')}
+            onClick={() => handleThemeChange('luxury')}
             className={`flex flex-col items-center flex-1 py-1.5 transition-all
               ${theme === 'luxury' ? 'bg-theme-primary text-black rounded-full' : 'text-zinc-500'}
             `}
@@ -53,7 +59,7 @@ export default function ThemeSwitcher() {
           </button>
 
           <button
-            onClick={() => setTheme('casual')}
+            onClick={() => handleThemeChange('casual')}
             className={`flex flex-col items-center flex-1 py-1.5 transition-all
               ${theme === 'casual' ? 'bg-theme-primary text-black rounded-full' : 'text-zinc-500'}
             `}

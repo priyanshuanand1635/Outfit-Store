@@ -31,6 +31,7 @@ const AboutContent = ({ theme }) => (
                src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&auto=format&fit=crop" 
                alt="Vision" 
                className={`w-full h-full object-cover grayscale transition-all duration-700 hover:grayscale-0 hover:scale-105`}
+               loading="lazy"
              />
           </div>
           <div className="flex flex-col">
@@ -66,6 +67,7 @@ const AboutContent = ({ theme }) => (
                src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=800&auto=format&fit=crop" 
                alt="Craft" 
                className={`w-full h-full object-cover grayscale transition-all duration-700 hover:grayscale-0 hover:scale-105`}
+               loading="lazy"
              />
           </div>
         </div>

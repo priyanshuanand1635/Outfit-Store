@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Search, ShoppingBag, User, Menu, Heart } from 'lucide-react'
 import { useTheme } from '../context/ThemeContext'
 import { useCart } from '../context/CartContext'
@@ -6,6 +6,12 @@ import { useCart } from '../context/CartContext'
 export default function Navbar() {
   const { theme, setTheme } = useTheme()
   const { cartCount } = useCart()
+  const navigate = useNavigate()
+
+  const handleThemeChange = (t) => {
+    setTheme(t)
+    navigate('/')
+  }
 
   if (theme === 'streetwear') {
     return (
@@ -22,7 +28,7 @@ export default function Navbar() {
             {['streetwear', 'luxury', 'casual'].map(t => (
               <button
                 key={t}
-                onClick={() => setTheme(t)}
+                onClick={() => handleThemeChange(t)}
                 className={`text-[9px] font-black tracking-widest uppercase px-5 py-1.5 transition-all
                   ${theme === t ? 'bg-theme-primary text-black rounded-full' : 'text-zinc-500'}
                 `}
@@ -73,7 +79,7 @@ export default function Navbar() {
             {['luxury', 'street', 'casual'].map(t => (
               <button
                 key={t}
-                onClick={() => setTheme(t === 'street' ? 'streetwear' : t)}
+                onClick={() => handleThemeChange(t === 'street' ? 'streetwear' : t)}
                 className={`text-[8px] uppercase tracking-widest px-4 py-1.5 transition-all
                   ${theme === (t === 'street' ? 'streetwear' : t) ? 'bg-theme-primary text-theme-on-primary rounded-full' : 'text-theme-outline-var/60'}
                 `}
@@ -107,7 +113,7 @@ export default function Navbar() {
           {['streetwear', 'luxury', 'casual'].map(t => (
             <button
               key={t}
-              onClick={() => setTheme(t)}
+              onClick={() => handleThemeChange(t)}
               className={`text-[9px] font-bold uppercase px-4 py-1.5 transition-all rounded-full
                 ${theme === t ? 'bg-theme-primary text-white shadow-sm' : 'text-theme-on-surface-var hover:text-theme-primary'}
               `}

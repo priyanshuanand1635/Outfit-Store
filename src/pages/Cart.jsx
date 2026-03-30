@@ -25,7 +25,7 @@ const CartLayout = ({ theme, cart, removeFromCart, updateQty, applyPromo, promoC
             {cart.map(item => (
               <div key={`${item.id}-${item.size}`} className="flex flex-col sm:flex-row gap-8 pb-12 border-b border-theme-outline-var/10 group">
                 <div className={`w-full sm:w-56 aspect-[3/4] overflow-hidden bg-theme-surface-low ${theme === 'casual' ? 'rounded-2xl' : ''}`}>
-                  <img src={item.image} className={`w-full h-full object-cover ${theme === 'streetwear' ? 'grayscale group-hover:grayscale-0' : ''}`} alt={item.name} />
+                  <img src={item.image} className={`w-full h-full object-cover ${theme === 'streetwear' ? 'grayscale group-hover:grayscale-0' : ''}`} alt={item.name} loading="lazy" />
                 </div>
                 <div className="flex flex-col flex-1">
                   <div className="flex justify-between items-start">

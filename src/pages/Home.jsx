@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, ArrowDown } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { useTheme } from '../context/ThemeContext'
 import { products } from '../data/products'
 import ProductCard from '../components/ProductCard'
@@ -10,9 +10,10 @@ const StreetwearHome = () => (
     <section className="relative h-[85vh] w-full flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=1600&auto=format&fit=crop" 
+          src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=1200&auto=format&fit=crop&q=75" 
           className="w-full h-full object-cover opacity-50 grayscale" 
           alt="Hero"
+          loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-theme-bg via-transparent to-theme-bg/40" />
       </div>
@@ -67,9 +68,10 @@ const StreetwearHome = () => (
       {['Outerwear', 'Footwear', 'Archives'].map((cat, i) => (
         <Link key={cat} to="/shop" className="flex-1 h-[600px] overflow-hidden relative group bg-zinc-950 border-r border-white/5 last:border-r-0">
           <img 
-            src={`https://images.unsplash.com/photo-${i === 0 ? '1551028719-01c1eb5fe9b0' : i === 1 ? '1542291026-7eec264c27ff' : '1556821840-3a63f15732ce'}?w=800&auto=format&fit=crop`} 
+            src={`https://images.unsplash.com/photo-${i === 0 ? '1551028719-01c1eb5fe9b0' : i === 1 ? '1542291026-7eec264c27ff' : '1556821840-3a63f15732ce'}?w=800&auto=format&fit=crop&q=80`} 
             className="w-full h-full object-cover opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 grayscale"
             alt={cat}
+            loading="lazy"
           />
           <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
             <h3 className="text-5xl font-headline font-black italic uppercase tracking-tighter text-white transform group-hover:-translate-y-4 transition-transform duration-500 underline decoration-theme-primary decoration-0 group-hover:decoration-4 underline-offset-8">{cat}</h3>
@@ -82,33 +84,201 @@ const StreetwearHome = () => (
 
 // --- LUXURY LAYOUT ---
 const LuxuryHome = () => (
-  <div className="bg-theme-bg min-h-screen transition-colors duration-theme">
-    <section className="h-[90vh] grid grid-cols-1 lg:grid-cols-2 mt-24">
-      <div className="flex flex-col justify-center px-12 lg:px-24">
-        <h1 className="font-headline font-light text-[5rem] md:text-[8rem] leading-[0.85] tracking-[-0.04em] text-theme-on-surface">LUXE <br /><span className="italic font-light">DROP</span> <br />2026</h1>
-        <p className="mt-12 text-theme-outline-var text-lg tracking-widest max-w-md leading-relaxed">Timeless silhouettes designed for the discerning individual. Meticulously crafted using the finest natural fibers.</p>
-        <Link to="/shop" className="mt-16 inline-block w-max bg-theme-primary text-theme-on-primary px-16 py-6 text-[0.75rem] uppercase tracking-[0.3em] font-medium hover:bg-theme-primary-dim transition-all duration-500">The Collection</Link>
+  <div className="min-h-screen" style={{ background: '#faf9f6', color: '#2c2820' }}>
+
+    {/* ── HERO: Full-bleed split — text left, editorial photo right ── */}
+    <section className="h-[92vh] grid grid-cols-1 lg:grid-cols-2 mt-20">
+      <div className="flex flex-col justify-center px-12 lg:px-24" style={{ background: '#faf9f6' }}>
+        {/* Pretitle */}
+        <div className="flex items-center gap-4 mb-12">
+          <div className="h-px w-12" style={{ background: '#a0845a' }} />
+          <span className="text-[9px] uppercase tracking-[0.45em]" style={{ color: '#a0845a' }}>Maison Vanguard — SS 2026</span>
+        </div>
+        <h1 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(4rem, 8vw, 8rem)', lineHeight: 0.85, letterSpacing: '-0.03em', color: '#1a1612', fontWeight: 300 }}>
+          The<br /><em>Quiet</em><br />Luxury
+        </h1>
+        <p className="mt-12 text-lg leading-relaxed max-w-md" style={{ color: '#7a6b58', fontWeight: 300, letterSpacing: '0.01em' }}>
+          Timeless silhouettes for the discerning individual. Crafted from the finest natural fibres sourced across three continents.
+        </p>
+        <div className="flex items-center gap-6 mt-16">
+          <Link to="/shop"
+            className="text-[10px] uppercase tracking-[0.35em] px-12 py-5 font-medium transition-all duration-500"
+            style={{ background: '#2c2820', color: '#faf9f6' }}
+            onMouseEnter={e => { e.currentTarget.style.background = '#a0845a' }}
+            onMouseLeave={e => { e.currentTarget.style.background = '#2c2820' }}
+          >
+            The Collection
+          </Link>
+          <Link to="/about" className="text-[9px] uppercase tracking-[0.35em] pb-1 transition-all" style={{ color: '#a0845a', borderBottom: '1px solid #a0845a' }}>
+            Our Story
+          </Link>
+        </div>
       </div>
-      <div className="relative overflow-hidden group">
-        <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1200&auto=format&fit=crop" className="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-105" alt="Luxury Hero" />
+
+      {/* Hero image */}
+      <div className="relative overflow-hidden group h-full">
+        <img
+          src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1200&auto=format&fit=crop&q=80"
+          alt="Luxury Hero"
+          className="w-full h-full object-cover"
+          style={{ transition: 'transform 2s cubic-bezier(0.25,0.46,0.45,0.94)' }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.05)' }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)' }}
+          loading="lazy"
+        />
+        {/* Gold overlay stripe — bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-1" style={{ background: 'linear-gradient(to right, transparent, #a0845a, transparent)' }} />
       </div>
     </section>
 
-    <section className="max-w-[1400px] mx-auto px-12 py-32">
-      <div className="text-center mb-24">
-        <h2 className="font-headline font-light italic text-5xl text-theme-on-surface tracking-tight">Selected Pieces</h2>
-        <div className="w-24 h-[1px] bg-theme-outline-var mx-auto mt-8 opacity-40" />
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-        {products.slice(3, 7).map(p => <ProductCard key={p.id} product={p} />)}
+    {/* ── DIVIDER ── */}
+    <div className="flex items-center gap-8 px-12 py-16" style={{ borderTop: '1px solid rgba(160,132,90,0.2)', borderBottom: '1px solid rgba(160,132,90,0.2)' }}>
+      {['Outerwear', 'Ready-to-Wear', 'Accessories', 'New Season'].map((cat, i) => (
+        <div key={cat} className="flex items-center gap-8">
+          <Link to="/shop" className="text-[9px] uppercase tracking-[0.5em] transition-colors" style={{ color: '#a0845a' }}
+            onMouseEnter={e => e.currentTarget.style.color = '#2c2820'}
+            onMouseLeave={e => e.currentTarget.style.color = '#a0845a'}
+          >{cat}</Link>
+          {i < 3 && <span className="text-[8px]" style={{ color: 'rgba(160,132,90,0.4)' }}>◆</span>}
+        </div>
+      ))}
+    </div>
+
+    {/* ── LOOKBOOK ROW: 3-column editorial images ── */}
+    <section className="grid grid-cols-3 h-[75vh]">
+      {[
+        { src: 'photo-1490481651871-ab68de25d43d', label: 'Outerwear' },
+        { src: 'photo-1515886657613-9f3515b0c78f', label: 'Evening' },
+        { src: 'photo-1539185441755-769473a23570', label: 'Tailoring' },
+      ].map((item, i) => (
+        <Link to="/shop" key={item.label}
+          className="relative overflow-hidden group"
+          style={{ borderRight: i < 2 ? '1px solid rgba(160,132,90,0.2)' : 'none' }}
+        >
+          <img
+            src={`https://images.unsplash.com/${item.src}?w=700&auto=format&fit=crop&q=80`}
+            alt={item.label}
+            className="w-full h-full object-cover"
+            style={{ transition: 'transform 1.4s cubic-bezier(0.25,0.46,0.45,0.94)', transform: 'scale(1)' }}
+            onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.06)' }}
+            onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)' }}
+            loading="lazy"
+          />
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+            style={{ background: 'linear-gradient(to top, rgba(26,22,18,0.6) 0%, transparent 60%)' }}
+          />
+          <div className="absolute bottom-0 left-0 right-0 p-8 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+            <p className="text-[9px] uppercase tracking-[0.5em] mb-2" style={{ color: '#c8b89a' }}>{item.label}</p>
+            <p className="text-white text-sm font-light" style={{ fontFamily: 'Georgia, serif' }}>Explore →</p>
+          </div>
+        </Link>
+      ))}
+    </section>
+
+    {/* ── SELECTED PIECES ── */}
+    <section style={{ background: '#f5f2ec', padding: '8rem 3rem' }}>
+      <div className="max-w-[1400px] mx-auto">
+        <div className="flex items-end justify-between mb-20">
+          <div>
+            <span className="text-[9px] uppercase tracking-[0.45em] block mb-4" style={{ color: '#a0845a' }}>The Maison</span>
+            <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(2.5rem, 4vw, 4rem)', fontWeight: 300, color: '#1a1612', fontStyle: 'italic' }}>
+              Selected Pieces
+            </h2>
+          </div>
+          <Link to="/shop" className="text-[9px] uppercase tracking-[0.4em] pb-1 transition-all"
+            style={{ color: '#a0845a', borderBottom: '1px solid rgba(160,132,90,0.5)' }}
+          >
+            View All
+          </Link>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {products.slice(3, 7).map(p => <ProductCard key={p.id} product={p} />)}
+        </div>
       </div>
     </section>
-    
-    <section className="w-full bg-theme-surface-low py-48 px-12 text-center">
-      <div className="max-w-4xl mx-auto">
-        <span className="text-[10px] uppercase tracking-[0.4em] text-theme-outline-var">Maison Identity</span>
-        <h2 className="font-headline font-light text-4xl md:text-6xl mt-8 leading-tight italic text-theme-on-surface">"Sustainability practiced through longevity and intention."</h2>
-        <Link to="/about" className="mt-12 inline-block border-b border-theme-outline-var pb-2 text-[10px] uppercase tracking-widest text-theme-on-surface hover:text-theme-primary hover:border-theme-primary transition-all">Read Our Etiquette</Link>
+
+    {/* ── EDITORIAL STRIP: full-width image with quote overlay ── */}
+    <section className="relative h-[80vh] overflow-hidden">
+      <img
+        src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1600&auto=format&fit=crop&q=75"
+        alt="Editorial"
+        className="w-full h-full object-cover"
+        loading="lazy"
+      />
+      <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(26,22,18,0.85) 0%, rgba(26,22,18,0.2) 60%, transparent 100%)' }} />
+      <div className="absolute inset-0 flex items-center px-16 lg:px-32">
+        <div className="max-w-xl">
+          <div className="flex items-center gap-4 mb-8">
+            <div className="h-px w-8" style={{ background: '#a0845a' }} />
+            <span className="text-[9px] uppercase tracking-[0.5em]" style={{ color: '#a0845a' }}>Maison Identity</span>
+          </div>
+          <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 300, color: '#faf9f6', lineHeight: 1.2, fontStyle: 'italic' }}>
+            "Clothing as an act of quiet devotion."
+          </h2>
+          <p className="mt-8 text-base font-light leading-relaxed" style={{ color: 'rgba(250,249,246,0.65)', maxWidth: '36ch' }}>
+            Every garment begins as a single thought — to create something that outlasts the moment.
+          </p>
+          <Link to="/about"
+            className="inline-block mt-12 text-[9px] uppercase tracking-[0.45em] pb-1 transition-all"
+            style={{ color: '#c8b89a', borderBottom: '1px solid rgba(200,184,154,0.5)' }}
+          >
+            Read Our Manifesto
+          </Link>
+        </div>
+      </div>
+    </section>
+
+    {/* ── DUAL IMAGE SECTION: craftsmanship ── */}
+    <section className="grid grid-cols-1 lg:grid-cols-2" style={{ background: '#faf9f6' }}>
+      {/* Left image */}
+      <div className="relative h-[70vh] overflow-hidden group">
+        <img
+          src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=900&auto=format&fit=crop&q=80"
+          alt="Craftsmanship"
+          className="w-full h-full object-cover"
+          style={{ transition: 'transform 1.6s ease', transform: 'scale(1)' }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.05)' }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)' }}
+          loading="lazy"
+        />
+      </div>
+      {/* Right text */}
+      <div className="flex flex-col justify-center px-16 lg:px-24 py-24" style={{ background: '#1a1612' }}>
+        <span className="text-[9px] uppercase tracking-[0.5em] block mb-8" style={{ color: '#a0845a' }}>The Craft</span>
+        <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(2.5rem, 3.5vw, 3.5rem)', fontWeight: 300, color: '#faf9f6', lineHeight: 1.15, fontStyle: 'italic' }}>
+          Precision in<br />every stitch.
+        </h2>
+        <p className="mt-8 text-base leading-relaxed" style={{ color: 'rgba(250,249,246,0.55)', fontWeight: 300, maxWidth: '38ch' }}>
+          Our atelier spans from Antwerp to Kyoto — each technique drawn from century-old traditions, applied to the contemporary silhouette.
+        </p>
+        <Link to="/about"
+          className="mt-12 inline-block text-[9px] uppercase tracking-[0.45em] pb-1 w-max transition-all"
+          style={{ color: '#c8b89a', borderBottom: '1px solid rgba(200,184,154,0.4)' }}
+        >
+          Our Process
+        </Link>
+      </div>
+    </section>
+
+    {/* ── MANIFESTO QUOTE ── */}
+    <section className="py-32 px-12 text-center" style={{ borderTop: '1px solid rgba(160,132,90,0.2)' }}>
+      <div className="max-w-3xl mx-auto">
+        <div className="flex items-center justify-center gap-6 mb-12">
+          <div className="h-px flex-1" style={{ background: 'linear-gradient(to right, transparent, rgba(160,132,90,0.4))' }} />
+          <span className="text-[8px] uppercase tracking-[0.6em]" style={{ color: '#a0845a' }}>Vanguard Luxe</span>
+          <div className="h-px flex-1" style={{ background: 'linear-gradient(to left, transparent, rgba(160,132,90,0.4))' }} />
+        </div>
+        <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(1.8rem, 3vw, 3rem)', fontWeight: 300, color: '#1a1612', lineHeight: 1.35, fontStyle: 'italic' }}>
+          "Sustainability practiced through longevity and intention."
+        </h2>
+        <Link to="/about"
+          className="mt-12 inline-block text-[9px] uppercase tracking-[0.45em] pb-1 transition-all"
+          style={{ color: '#a0845a', borderBottom: '1px solid rgba(160,132,90,0.5)' }}
+          onMouseEnter={e => e.currentTarget.style.color = '#2c2820'}
+          onMouseLeave={e => e.currentTarget.style.color = '#a0845a'}
+        >
+          Read Our Etiquette
+        </Link>
       </div>
     </section>
   </div>
@@ -119,7 +289,7 @@ const CasualHome = () => (
   <div className="bg-theme-bg min-h-screen">
     <section className="px-6 py-12 md:px-12 md:py-24">
       <div className="relative rounded-[3rem] overflow-hidden h-[70vh] group">
-        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=1600&auto=format&fit=crop" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" alt="Casual Hero" />
+        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=1200&auto=format&fit=crop&q=75" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" alt="Casual Hero" loading="lazy" />
         <div className="absolute inset-0 bg-theme-primary/10 backdrop-blur-[2px]" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
           <h1 className="font-headline font-extrabold text-6xl md:text-9xl text-white drop-shadow-2xl">Fresh & <br /> Friendly</h1>

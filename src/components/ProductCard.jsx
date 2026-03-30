@@ -15,6 +15,7 @@ export default function ProductCard({ product }) {
             src={product.image} 
             alt={product.name} 
             className="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-110"
+            loading="lazy"
           />
           {product.tag && (
             <span className="absolute top-4 left-4 bg-theme-primary text-black text-[10px] font-black uppercase px-3 py-1 z-10">
@@ -51,33 +52,72 @@ export default function ProductCard({ product }) {
   }
 
   if (theme === 'luxury') {
+    const imgSrc = product.luxuryImage || product.image
     return (
-      <div className="group relative bg-theme-surface-low overflow-hidden">
-        <div className="aspect-[3/4] overflow-hidden">
+      <div className="group relative overflow-hidden bg-[#faf9f6]" style={{ border: '1px solid rgba(180,160,120,0.25)' }}>
+        {/* Image container with editorial aspect ratio */}
+        <div className="aspect-[3/4] overflow-hidden relative bg-[#f5f2ec]">
           <img 
-            src={product.image} 
+            src={imgSrc}
             alt={product.name} 
-            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+            className="w-full h-full object-cover transition-all duration-[1500ms] group-hover:scale-108"
+            loading="lazy"
+            style={{ transform: 'scale(1)', transition: 'transform 1.5s cubic-bezier(0.25,0.46,0.45,0.94)' }}
+            onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.07)'}
+            onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
           />
-          
-          <button 
-            onClick={() => addToCart(product, product.sizes[0])}
-            className="absolute bottom-0 left-0 w-full bg-theme-primary text-theme-on-primary py-5 text-[10px] uppercase tracking-[0.2em] transform translate-y-full group-hover:translate-y-0 transition-transform duration-500"
-          >
-            Add to Selection
-          </button>
+
+          {/* Subtle dark vignette */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+          {/* Tag badge — gold foil style */}
+          {product.tag && (
+            <span className="absolute top-5 left-5 text-[9px] uppercase tracking-[0.3em] px-3 py-1.5 font-medium"
+              style={{ background: 'rgba(180,155,100,0.15)', color: '#a0845a', border: '1px solid rgba(180,155,100,0.3)', backdropFilter: 'blur(8px)' }}
+            >
+              {product.tag}
+            </span>
+          )}
+
+          {/* Hover CTA — slides up from bottom */}
+          <div className="absolute bottom-0 left-0 right-0 flex flex-col gap-2 p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-500" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%)' }}>
+            <button 
+              onClick={() => addToCart(product, product.sizes[0])}
+              className="w-full py-3.5 text-[10px] uppercase tracking-[0.35em] font-medium text-white transition-all duration-300 hover:opacity-80"
+              style={{ background: 'rgba(180,155,100,0.85)', border: '1px solid rgba(255,255,255,0.2)' }}
+            >
+              Add to Maison
+            </button>
+            <Link 
+              to={`/product/${product.id}`}
+              className="w-full py-3 text-[9px] uppercase tracking-[0.35em] font-medium text-center transition-all duration-300 hover:opacity-80"
+              style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.3)', color: 'rgba(255,255,255,0.9)' }}
+            >
+              View Details
+            </Link>
+          </div>
         </div>
         
-        <div className="p-6 text-center">
-          <span className="block text-[10px] uppercase tracking-widest text-theme-outline-var mb-2">
+        {/* Info panel — refined editorial */}
+        <div className="px-6 py-5 text-center" style={{ borderTop: '1px solid rgba(180,160,120,0.2)' }}>
+          <span className="block text-[8px] uppercase tracking-[0.4em] mb-2" style={{ color: '#a0845a', letterSpacing: '0.35em' }}>
             {product.category}
           </span>
-          <Link to={`/product/${product.id}`} className="font-display font-light text-lg text-theme-on-surface hover:text-theme-primary transition-colors">
+          <Link to={`/product/${product.id}`} 
+            className="block font-light text-base transition-colors duration-300"
+            style={{ fontFamily: 'Georgia, serif', color: '#2c2820', letterSpacing: '0.02em' }}
+            onMouseEnter={e => e.currentTarget.style.color = '#a0845a'}
+            onMouseLeave={e => e.currentTarget.style.color = '#2c2820'}
+          >
             {product.name}
           </Link>
-          <span className="block font-medium text-theme-on-surface-var mt-2 tracking-widest text-sm">
-            ${product.price.toLocaleString()}
-          </span>
+          <div className="flex items-center justify-center gap-3 mt-3">
+            <div className="h-px flex-1 opacity-30" style={{ background: 'linear-gradient(to right, transparent, #a0845a)' }} />
+            <span className="text-sm font-light tracking-widest" style={{ color: '#6b5636' }}>
+              ${product.price.toLocaleString()}
+            </span>
+            <div className="h-px flex-1 opacity-30" style={{ background: 'linear-gradient(to left, transparent, #a0845a)' }} />
+          </div>
         </div>
       </div>
     )
@@ -91,6 +131,7 @@ export default function ProductCard({ product }) {
           src={product.image} 
           alt={product.name} 
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          loading="lazy"
         />
         <div className="absolute top-4 right-4 flex flex-col gap-2 transform translate-x-12 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all">
           <button 

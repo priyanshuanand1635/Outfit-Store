@@ -1,10 +1,9 @@
-import { useState, useMemo } from 'react'
-import { useParams, Link } from 'react-router-dom'
-import { Star, ShieldCheck, Truck, ShoppingBag, Heart, ArrowLeft, ArrowRight } from 'lucide-react'
+import { useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { ShoppingBag } from 'lucide-react'
 import { useTheme } from '../context/ThemeContext'
 import { useCart } from '../context/CartContext'
 import { products } from '../data/products'
-import ProductCard from '../components/ProductCard'
 
 const ProductDetailLayout = ({ theme, product, selectedSize, setSelectedSize, selectedColor, setSelectedColor, qty, setQty, addToCart }) => {
   return (
@@ -20,6 +19,7 @@ const ProductDetailLayout = ({ theme, product, selectedSize, setSelectedSize, se
                 className={`w-full h-full object-cover transition-all duration-700
                   ${theme === 'streetwear' ? 'grayscale hover:grayscale-0' : 'hover:scale-105'}
                 `}
+                loading="lazy"
               />
             </div>
           </div>
